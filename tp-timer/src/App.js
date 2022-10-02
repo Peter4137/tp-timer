@@ -9,10 +9,10 @@ const RACE_DISTANCE_METRES = 4000
 const TRACK_LENGTH_METRES = 250
 const LAPS = RACE_DISTANCE_METRES / TRACK_LENGTH_METRES
 const DIFF_MODAL_ACTIVE_MILLIS = 9000
-const MODAL_PREVENT_CLICK_MILLIS = 6000
+const MODAL_PREVENT_CLICK_MILLIS = 3000
 
 function App() {
-  const [targetLapTimes, setTargetLapTimes] = React.useState(Array(LAPS).fill(3));
+  const [targetLapTimes, setTargetLapTimes] = React.useState(Array(LAPS).fill(15));
   const [totalTime, setTotalTime] = React.useState(0);
   const [timerInterval, setTimerInterval] = React.useState(undefined);
   const [lapTimes, setLapTimes] = React.useState([]);
