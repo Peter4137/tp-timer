@@ -8,7 +8,8 @@ import { roundToDecimals, displayWithSign} from './helpers/times';
 const RACE_DISTANCE_METRES = 4000
 const TRACK_LENGTH_METRES = 250
 const LAPS = RACE_DISTANCE_METRES / TRACK_LENGTH_METRES
-const DIFF_MODAL_ACTIVE_MILLIS = 100000
+const DIFF_MODAL_ACTIVE_MILLIS = 9000
+const MODAL_PREVENT_CLICK_MILLIS = 6000
 
 function App() {
   const [targetLapTimes, setTargetLapTimes] = React.useState(Array(LAPS).fill(3));
@@ -17,6 +18,7 @@ function App() {
   const [lapTimes, setLapTimes] = React.useState([]);
   const [lapModalOpen, setLapModalOpen] = React.useState(false);
   const [lapDiffs, setLapDiffs] = React.useState([]);
+  const [modalOpenedTime, setModalOpenedTime] = React.useState(0);
 
   function handleTargetLapTimeChange(index, value) {
     let values = [...targetLapTimes];
@@ -53,6 +55,7 @@ function App() {
 
   function openLapModal() {
     setLapModalOpen(true);
+    setModalOpenedTime(Date.now())
     setTimeout(() => setLapModalOpen(false), DIFF_MODAL_ACTIVE_MILLIS);
   }
 
@@ -71,12 +74,18 @@ function App() {
     }
   }
 
+  function handleModalClick() {
+    if (Date.now() - modalOpenedTime > MODAL_PREVENT_CLICK_MILLIS) {
+      setLapModalOpen(false);
+    }
+  }
+
   return (
     <header className="App">
       <Stack direction="row"
         divider={<Divider orientation="vertical" flexItem />}
         spacing={2} className="page-stack">
-        <SplitTable 
+        <SplitTable
             {...{
               targetLapTimes,
               lapTimes,
@@ -97,7 +106,7 @@ function App() {
       </Stack>
       <Modal open={lapModalOpen} onClose={() => setLapModalOpen(false)}>
         <Box className="lap-modal-container" sx={getModalColours(lapDiffs[lapDiffs.length - 1])}
-          onClick={() => setLapModalOpen(false)}>
+          onClick={handleModalClick}>
             <div className="lap-modal-text">{displayWithSign(roundToDecimals(lapDiffs[lapDiffs.length - 1], 1))}</div>
         </Box>
       </Modal>
