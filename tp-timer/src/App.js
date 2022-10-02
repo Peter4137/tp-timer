@@ -8,7 +8,7 @@ import { roundToDecimals, displayWithSign} from './helpers/times';
 const RACE_DISTANCE_METRES = 4000
 const TRACK_LENGTH_METRES = 250
 const LAPS = RACE_DISTANCE_METRES / TRACK_LENGTH_METRES
-const DIFF_MODAL_ACTIVE_MILLIS = 9000
+const DIFF_MODAL_ACTIVE_MILLIS = 12000
 const MODAL_PREVENT_CLICK_MILLIS = 3000
 
 function App() {
