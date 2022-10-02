@@ -19,14 +19,16 @@ function Timer(props) {
               ? <Button className="timer-button" size="large" variant="contained" onClick={stopTimer}>Stop Timer</Button>
               : <Button className="timer-button" size="large" variant="contained" onClick={() => startTimer()}>Start Timer</Button>
             }
-            {timerInterval !== undefined 
-            ? <Button className="timer-button" size="large" variant="outlined" onClick={lapTimer}>Lap</Button>
-            : <Button className="timer-button" size="large" variant="outlined" color="warning" onClick={resetTimer}>Reset</Button>
-            }
           </Stack>
-            <Box className="timer-time-container">
-              <div className="timer-time">{formatTimeForDisplay(totalTime)}</div>
-            </Box>
+          <Box className="timer-time-container">
+            <div className="timer-time">{formatTimeForDisplay(totalTime)}</div>
+          </Box>
+          <Stack className="timer-button-row" direction="row" justifyContent="center" spacing={2}>
+            {timerInterval !== undefined 
+            ? <Button className="timer-button" size="large" variant="contained" color="secondary" onClick={lapTimer}>Lap</Button>
+            : <Button className="timer-button" size="large" variant="contained" color="warning" onClick={resetTimer}>Reset</Button>
+            }
+          </Stack>  
         </Stack>
       </Box>
     )
