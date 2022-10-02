@@ -8,7 +8,7 @@ import { roundToDecimals, displayWithSign} from './helpers/times';
 const RACE_DISTANCE_METRES = 4000
 const TRACK_LENGTH_METRES = 250
 const LAPS = RACE_DISTANCE_METRES / TRACK_LENGTH_METRES
-const DIFF_MODAL_ACTIVE_MILLIS = 1000
+const DIFF_MODAL_ACTIVE_MILLIS = 8000
 
 function App() {
   const [targetLapTimes, setTargetLapTimes] = React.useState(Array(LAPS).fill(15));
