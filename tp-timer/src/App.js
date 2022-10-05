@@ -17,6 +17,7 @@ function App() {
   const [timerInterval, setTimerInterval] = React.useState(undefined);
   const [lapTimes, setLapTimes] = React.useState([]);
   const [lapModalOpen, setLapModalOpen] = React.useState(false);
+  const [lapModalCloseTimeout, setLapModalCloseTimeout] = React.useState(undefined);
   const [lapDiffs, setLapDiffs] = React.useState([]);
   const [modalOpenedTime, setModalOpenedTime] = React.useState(0);
 
@@ -56,7 +57,7 @@ function App() {
   function openLapModal() {
     setLapModalOpen(true);
     setModalOpenedTime(Date.now())
-    setTimeout(() => setLapModalOpen(false), DIFF_MODAL_ACTIVE_MILLIS);
+    setLapModalCloseTimeout(setTimeout(() => setLapModalOpen(false), DIFF_MODAL_ACTIVE_MILLIS));
   }
 
   function getModalColours(lapDiff) {
@@ -76,6 +77,7 @@ function App() {
 
   function handleModalClick() {
     if (Date.now() - modalOpenedTime > MODAL_PREVENT_CLICK_MILLIS) {
+      clearTimeout(lapModalCloseTimeout);
       setLapModalOpen(false);
     }
   }
